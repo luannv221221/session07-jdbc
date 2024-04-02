@@ -28,6 +28,14 @@ public class Program {
                     }
                      break;
                 case 2:
+                    Category category = new Category();
+                    System.out.println("Nhập thông tin danh mục");
+                    category.inputData(scanner);
+                    if(categoryDAO.addCategory(category)){
+                        System.out.println("Thêm mới thành công");
+                    } else {
+                        System.out.println("Thêm mới thất bại");
+                    }
                     break;
                 case 3:
                     break;

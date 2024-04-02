@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Scanner;
+
 public class Category {
     private int categoryId;
     private String categoryName;
@@ -45,5 +47,12 @@ public class Category {
                 ", categoryName='" + categoryName + '\'' +
                 ", categoryStatus=" + categoryStatus +
                 '}';
+    }
+
+    public void inputData(Scanner scanner){
+        System.out.println("Nhập vào tên danh mục ");
+        categoryName = scanner.nextLine();
+        System.out.println("Nhập vào trạng thái true|false");
+        categoryStatus = Boolean.parseBoolean(scanner.nextLine());
     }
 }

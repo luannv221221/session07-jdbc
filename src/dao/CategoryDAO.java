@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CategoryDAO {
     List<Category> getAllCategory();
+    boolean addCategory(Category category);
 }

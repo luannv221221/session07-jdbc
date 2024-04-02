@@ -29,7 +29,29 @@ public class CategoryDAOImpl implements CategoryDAO{
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            ConnectionDB.closeConnection(connection);
         }
         return categories;
+    }
+
+    @Override
+    public boolean addCategory(Category category) {
+        Connection connection = ConnectionDB.openConnection();
+        try {
+            String sql = "INSERT INTO categories(category_name,category_status) VALUE (?,?) ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,category.getCategoryName());
+            statement.setBoolean(2,category.getCategoryStatus());
+            int check = statement.executeUpdate();
+            if(check>0){
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectionDB.closeConnection(connection);
+        }
+        return false;
     }
 }
