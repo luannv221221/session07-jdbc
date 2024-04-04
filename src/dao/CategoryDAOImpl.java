@@ -81,4 +81,26 @@ public class CategoryDAOImpl implements CategoryDAO{
         }
         return category;
     }
+
+    @Override
+    public boolean updateCategory(Category category) {
+        Connection connection = ConnectionDB.openConnection();
+
+        try {
+            String sql = "UPDATE categories SET category_name = ?, category_status = ? WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,category.getCategoryName());
+            statement.setBoolean(2,category.getCategoryStatus());
+            statement.setInt(3,category.getCategoryId());
+            int check = statement.executeUpdate();
+            if(check > 0){
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectionDB.closeConnection(connection);
+        }
+        return false;
+    }
 }

@@ -46,6 +46,14 @@ public class Program {
                     } else {
                         System.out.println("Có phải bạn muốn thay đổi thông tin của danh mục này à: ");
                         System.out.println(categoryEdit.toString());
+                        System.out.println("Nhập vào thông tin mới ");
+                        System.out.println("Nhập tên danh mục mới ");
+                        categoryEdit.setCategoryName(scanner.nextLine());
+                        System.out.println("Nhập vo trạng thái danh mục mới");
+                        categoryEdit.setCategoryStatus(Boolean.parseBoolean(scanner.nextLine()));
+                        if(categoryDAO.updateCategory(categoryEdit)){
+                            System.out.println("Cập nhật thành công");
+                        }
                     }
                     break;
                 case 4:
