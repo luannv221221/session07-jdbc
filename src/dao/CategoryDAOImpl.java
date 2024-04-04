@@ -54,4 +54,31 @@ public class CategoryDAOImpl implements CategoryDAO{
         }
         return false;
     }
+
+    @Override
+    public Category findById(int id) {
+        Connection connection = ConnectionDB.openConnection();
+        Category category = new Category();
+        try {
+            String sql = "SELECT * FROM categories WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if(!resultSet.isBeforeFirst()){
+                return null;
+            }
+            while (resultSet.next()){
+                category.setCategoryId(resultSet.getInt("id"));
+                category.setCategoryName(resultSet.getString("category_name"));
+                category.setCategoryStatus(resultSet.getBoolean("category_status"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectionDB.closeConnection(connection);
+        }
+        return category;
+    }
 }

@@ -38,6 +38,15 @@ public class Program {
                     }
                     break;
                 case 3:
+                    System.out.println("Mời bạn nhập vào id cần sửa ");
+                    int id = Integer.parseInt(scanner.nextLine());
+                    Category categoryEdit = categoryDAO.findById(id);
+                    if(categoryEdit == null){
+                        System.err.println("Rất tiêc không tìm thấy danh mục nào có id = "+id);
+                    } else {
+                        System.out.println("Có phải bạn muốn thay đổi thông tin của danh mục này à: ");
+                        System.out.println(categoryEdit.toString());
+                    }
                     break;
                 case 4:
                     break;
